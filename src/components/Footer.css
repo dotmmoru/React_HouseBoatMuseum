@@ -1,0 +1,51 @@
+.app-footer {
+    background-color: #003366;
+    color: #ffffff;
+    padding: 30px 20px;
+    text-align: left;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 20px;
+}
+
+.footer-section h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.footer-section p {
+    margin: 5px 0;
+    font-size: 1rem;
+}
+
+.footer-section a {
+    color: #ffffff;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: #f1f1f1;
+}
+
+/* Для мобільних пристроїв */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import Gallery from './components/Gallery';
+import Footer from './components/Footer';
 import './App.css';
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
             </a>
           </li>
           <li className="nav-item">
-            <a href="https://houseboatmuseum.nl/the-museum" target="_blank" rel="noopener noreferrer">
+            <a href="https://houseboatmuseum.nl/canal-museum-amsterdam/" target="_blank" rel="noopener noreferrer">
               The Museum
             </a>
           </li>
@@ -41,6 +42,9 @@ function App() {
       <main>
         <Gallery />
       </main>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }

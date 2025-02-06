@@ -1,7 +1,8 @@
 .gallery-container {
     margin: 0 auto;
     padding: 40px 20px;
-    max-width: 1200px;
+    max-width: 100%;
+    overflow: hidden;
     background-color: #ffffff;
     /* Білий фон для галереї */
     border-radius: 10px;
@@ -21,8 +22,20 @@
 /* Photo grid */
 .gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    max-width: 100%;
+    overflow: hidden;
+}
+
+/* Адаптація для мобільних пристроїв */
+@media (max-width: 768px) {
+    .gallery {
+        grid-template-columns: repeat(3, 1fr);
+        /* 3 фото в ряд */
+        gap: 10px;
+        /* Зменшення відступів для мобільних */
+    }
 }
 
 .photo-item {
@@ -50,4 +63,36 @@
     font-size: 1.2rem;
     color: #777;
     margin-top: 20px;
+}
+
+.download-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: #00509e;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s;
+
+    /* Додаємо контрастну тінь */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+
+    /* Робимо кнопку поверх всіх елементів */
+    z-index: 999999 !important;
+}
+
+.download-btn:hover {
+    background-color: #003366;
+    transform: scale(1.05);
+}
+
+/* Додаємо правки до самого Lightbox */
+.awesome-lightbox {
+    z-index: 1000 !important;
+    /* Lightbox не перекриватиме кнопку */
 }
