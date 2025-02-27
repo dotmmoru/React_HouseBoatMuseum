@@ -21,32 +21,40 @@ function Gallery() {
         setOpenLightbox(true);
     };
 
-    const downloadImage = (url) => {
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = `photo-${photoIndex + 1}.jpg`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+    const downloadImage = async (url) => {
+        try {
+            const response = await fetch(url);
+            const blob = await response.blob(); // Отримуємо файл у форматі Blob
+            const objectURL = URL.createObjectURL(blob);
+
+            const link = document.createElement('a');
+            link.href = objectURL;
+            link.download = `photo-${photoIndex + 1}.jpg`; // Ім'я файлу
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            URL.revokeObjectURL(objectURL); // Очищення пам'яті
+        } catch (error) {
+            console.error('Error downloading the image:', error);
+        }
     };
+
 
     return (
         <div className="gallery-container">
             <h2 className="gallery-title">Photo Gallery</h2>
+            {photos.length === 0 && <p className="no-photos-message">No photos available to display</p>}
             <div className="gallery">
-                {photos.length > 0 ? (
-                    photos.map((photo, index) => (
-                        <div className="photo-item" key={index} onClick={() => handleImageClick(index)}>
-                            <img
-                                src={`${CONFIG.API_BASE_URL}${photo}`}
-                                alt={`Photo ${index + 1}`}
-                                className="photo-image"
-                            />
-                        </div>
-                    ))
-                ) : (
-                    <p className="no-photos-message">No photos available to display</p>
-                )}
+                {photos.length > 0 && photos.map((photo, index) => (
+                    <div className="photo-item" key={index} onClick={() => handleImageClick(index)}>
+                        <img
+                            src={`${CONFIG.API_BASE_URL}${photo}`}
+                            alt={`Photo ${index + 1}`}
+                            className="photo-image"
+                        />
+                    </div>
+                ))}
             </div>
 
             {openLightbox && (
@@ -56,7 +64,6 @@ function Gallery() {
                         startIndex={photoIndex}
                         onClose={() => setOpenLightbox(false)}
                     />
-                    {/* Відображення кнопки зверху */}
                     <button
                         className="download-btn"
                         onClick={() => downloadImage(`${CONFIG.API_BASE_URL}${photos[photoIndex]}`)}

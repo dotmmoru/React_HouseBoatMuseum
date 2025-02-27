@@ -4,10 +4,8 @@
     max-width: 100%;
     overflow: hidden;
     background-color: #ffffff;
-    /* Білий фон для галереї */
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    /* Легка тінь */
 }
 
 .gallery-title {
@@ -16,10 +14,8 @@
     font-weight: bold;
     margin-bottom: 20px;
     color: #003366;
-    /* Темно-синій */
 }
 
-/* Photo grid */
 .gallery {
     display: grid;
     gap: 20px;
@@ -28,13 +24,10 @@
     overflow: hidden;
 }
 
-/* Адаптація для мобільних пристроїв */
 @media (max-width: 768px) {
     .gallery {
         grid-template-columns: repeat(3, 1fr);
-        /* 3 фото в ряд */
         gap: 10px;
-        /* Зменшення відступів для мобільних */
     }
 }
 
@@ -79,10 +72,8 @@
     cursor: pointer;
     transition: background 0.3s ease, transform 0.2s;
 
-    /* Додаємо контрастну тінь */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 
-    /* Робимо кнопку поверх всіх елементів */
     z-index: 999999 !important;
 }
 
@@ -91,8 +82,6 @@
     transform: scale(1.05);
 }
 
-/* Додаємо правки до самого Lightbox */
 .awesome-lightbox {
     z-index: 1000 !important;
-    /* Lightbox не перекриватиме кнопку */
 }

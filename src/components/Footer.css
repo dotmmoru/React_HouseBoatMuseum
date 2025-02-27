@@ -5,8 +5,11 @@
     text-align: left;
     max-width: 100%;
     overflow: hidden;
+    margin-top: auto;
+    /* Keeps footer at bottom */
 }
 
+/* Footer content styles */
 .footer-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -42,7 +45,7 @@
     color: #f1f1f1;
 }
 
-/* Для мобільних пристроїв */
+/* Responsive styles */
 @media (max-width: 768px) {
     .footer-container {
         flex-direction: column;
