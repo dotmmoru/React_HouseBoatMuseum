@@ -21,24 +21,30 @@ function Gallery() {
         setOpenLightbox(true);
     };
 
-    const downloadImage = async (url) => {
+    const downloadFile = async (url, fileName = 'downloaded-file') => {
         try {
             const response = await fetch(url);
-            const blob = await response.blob(); // Отримуємо файл у форматі Blob
+            const blob = await response.blob(); // Get the file as a Blob
+
+            // Extract the file extension from the URL (if available)
+            const extension = url.split('.').pop().split(/\#|\?/)[0] || 'file';
             const objectURL = URL.createObjectURL(blob);
 
+            // Create and trigger a download link
             const link = document.createElement('a');
             link.href = objectURL;
-            link.download = `photo-${photoIndex + 1}.jpg`; // Ім'я файлу
+            link.download = `${fileName}.${extension}`; // Use extracted extension
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
 
-            URL.revokeObjectURL(objectURL); // Очищення пам'яті
+            // Revoke the temporary URL to free memory
+            URL.revokeObjectURL(objectURL);
         } catch (error) {
-            console.error('Error downloading the image:', error);
+            console.error('Error downloading the file:', error);
         }
     };
+
 
 
     return (
@@ -66,7 +72,7 @@ function Gallery() {
                     />
                     <button
                         className="download-btn"
-                        onClick={() => downloadImage(`${CONFIG.API_BASE_URL}${photos[photoIndex]}`)}
+                        onClick={() => downloadFile(`${CONFIG.API_BASE_URL}${photos[photoIndex]}`)}
                     >
                         Download
                     </button>
